@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
                 cursors[collider.gameObject] = new HashSet<GameObject>();
             }
 
-            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.up * 2f, Quaternion.identity));
+            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.up * collider.bounds.size.y, Quaternion.identity));
         }
 
         if (!hitInfoLeft || hitInfoLeft.collider.CompareTag("Player"))
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
                 cursors[collider.gameObject] = new HashSet<GameObject>();
             }
 
-            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.left * 2f, Quaternion.identity));
+            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.left * collider.bounds.size.x, Quaternion.identity));
         }
 
         if (!hitInfoRight || hitInfoRight.collider.CompareTag("Player"))
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
                 cursors[collider.gameObject] = new HashSet<GameObject>();
             }
 
-            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.right * 2f, Quaternion.identity));
+            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.right * collider.bounds.size.y, Quaternion.identity));
         }
 
 
