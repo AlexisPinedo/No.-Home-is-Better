@@ -4,8 +4,31 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private float speed = 5f;
+
+    [SerializeField]
+    private float height;
+
+    [SerializeField]
+    private Rigidbody2D playerBody;
+
+    [SerializeField]
+    private GameObject playerGameObject;
+
+    [SerializeField]
+    private GameObject Cursor;
+
+    [SerializeField]
+    private BoxCollider2D bigTrigger;
+
+    private float xVal;
+
+    private bool isGrounded = true;
+
+    private bool blockGrabbed = false;
+
     private Dictionary<GameObject, HashSet<GameObject>> cursors;
-    public GameObject Cursor;
 
 
 
@@ -16,9 +39,25 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        bigTrigger.enabled = blockGrabbed;
+        float xVal = Input.GetAxis("Horizontal");
+
+        playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            playerBody.velocity = new Vector2(playerBody.velocity.x, height);
+            isGrounded = false;
+        }
+
+        if (blockGrabbed == true && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("Trying to let go of block");
+            playerGameObject.transform.Find("Block").parent = null;
+            blockGrabbed = false;
+        }
     }
 
     void CreateCursor(Collider2D collider)
@@ -61,7 +100,7 @@ public class Player : MonoBehaviour
                 cursors[collider.gameObject] = new HashSet<GameObject>();
             }
 
-            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.right * collider.bounds.size.y, Quaternion.identity));
+            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.right * collider.bounds.size.x, Quaternion.identity));
         }
 
 
@@ -79,6 +118,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        //Debug.Log("Collision detected");
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            //Debug.Log("Player hit ground");
+            isGrounded = true;
+        }
+
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //when block enters player's trigger, instantiate the cursor
@@ -86,6 +137,15 @@ public class Player : MonoBehaviour
         if (collider.CompareTag("Block"))
         {
             CreateCursor(collider);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Block") && Input.GetKeyDown(KeyCode.LeftShift) && blockGrabbed == false)
+        {
+            other.gameObject.transform.parent = playerGameObject.transform;
+            blockGrabbed = true;
         }
     }
 
