@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 1290358589}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Platform
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 1436300995}
   - component: {fileID: 1436300996}
   - component: {fileID: 1436300997}
+  - component: {fileID: 1436300998}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -317,6 +318,7 @@ MonoBehaviour:
   speed: 5
   height: 8
   playerBody: {fileID: 1436300995}
+  playerGameObject: {fileID: 0}
 --- !u!61 &1436300994
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -403,6 +405,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cursor: {fileID: 7758009135532258736, guid: 24c1418b22b380d419b7dafcb55d5138, type: 3}
+--- !u!114 &1436300998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436300990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d28a4681f6e2f3049994b9b236f293ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  height: 0
+  playerBody: {fileID: 1436300995}
+  playerGameObject: {fileID: 6441517404679743223}
 --- !u!1 &1773536426
 GameObject:
   m_ObjectHideFlags: 0
