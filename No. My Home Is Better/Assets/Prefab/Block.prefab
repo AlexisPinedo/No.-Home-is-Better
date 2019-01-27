@@ -120,8 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb75362f0509db4589496aedcaa8946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block_controller: {fileID: 6722094266207790386, guid: 39fe81bafb2cac44d9f19698026094df,
-    type: 3}
+  Player: {fileID: 4618871157548201093, guid: d2ea0ac22b1aa134893528213fefca1f, type: 3}
   notAPlatform: {fileID: 0}
 --- !u!251 &1064143292
 PlatformEffector2D:

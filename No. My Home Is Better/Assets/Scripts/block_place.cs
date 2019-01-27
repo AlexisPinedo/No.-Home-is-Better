@@ -163,13 +163,13 @@ public class block_place : MonoBehaviour
 	}
 	
 	
-	public bool IsBlockAbove(Vector3 pos) {
+	public bool IsBlockBelow(Vector3 pos) {
 		Slot slot = GetSlotContaining(pos);
 		if (slot == null) {
 			return false;
 		}
 		
-		if (slot.gridPos.y != gridHeight - 1 && !blockGrid[(int)slot.gridPos.x, (int)slot.gridPos.y + 1].isEmpty) {
+		if (slot.gridPos.y != 0 && !blockGrid[(int)slot.gridPos.x, (int)slot.gridPos.y - 1].isEmpty) {
 			return true;
 		}
 		return false;

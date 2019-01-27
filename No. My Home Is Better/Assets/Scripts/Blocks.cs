@@ -5,7 +5,7 @@ using UnityEngine;
 public class Blocks : MonoBehaviour
 {
     [SerializeField]
-    public Player player;
+    public GameObject Player;
 
     public Sprite notAPlatform;
     // Start is called before the first frame update
@@ -23,10 +23,13 @@ public class Blocks : MonoBehaviour
          *      this.GetComponent<SpriteRenderer>().sprite = notAPlatform;
          * 
          * */
-        if(player.BlockController.IsBlockAbove(transform.position))
+         //Debug.Log(Player.GetComponent<Player>().BlockController);
+         
+        /*if(Player.GetComponent<Player>().BlockController.IsBlockAbove(transform.position))
         {
+			Debug.Log("Above");
             GetComponent<Collider2D>().enabled = false;
-        }
+        }*/
 
     }
 

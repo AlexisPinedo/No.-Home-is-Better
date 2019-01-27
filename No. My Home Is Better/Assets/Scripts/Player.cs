@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
 	private bool facingLeft = false;
 
-    public Animator playerAnimator;
+    //public Animator playerAnimator;
 
     private void Awake()
     {
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
         
-        playerAnimator.SetFloat("speed", xVal*speed);
+        //playerAnimator.SetFloat("speed", xVal*speed);
 
         if (Input.GetButtonDown(jumpButton) && isGrounded)
         {
@@ -121,6 +121,19 @@ public class Player : MonoBehaviour
 
         droppedBlock.transform.position = CurrentCursor.transform.position;
         BlockController.PlaceBlock(droppedBlock.transform.position);
+        if (BlockController.IsBlockBelow(droppedBlock.transform.position)) {
+			
+			Debug.Log("Below");
+			
+			
+			GameObject[] objects = GameObject.FindGameObjectsWithTag("Block");
+			foreach(var o in objects) {
+				if (Mathf.Approximately(droppedBlock.transform.position.y -1 , o.transform.position.y) && 
+						Mathf.Approximately(droppedBlock.transform.position.x , o.transform.position.x)) {
+					o.GetComponent<Collider2D>().enabled = false;
+				}
+			}
+		}
         Destroy(CurrentCursor);
 
         droppedBlock.name = "Dropped Block";
@@ -138,8 +151,8 @@ public class Player : MonoBehaviour
 
         //Get the free positions
         List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
-        //if (freePosition != null)
-        //{
+        if (freePosition != null)
+        {
             Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
             if (cursorPosition != BlockController.DNE)
             {
@@ -155,7 +168,9 @@ public class Player : MonoBehaviour
 
                 //BlockController.PlaceBlock(cursorPosition);
            }
-        //}
+        } else if(CurrentCursor != null) {
+			Destroy(CurrentCursor);
+		}
 
 
 
@@ -177,7 +192,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Block") && Input.GetButton(grabButton) && blockGrabbed == false)
+        if (other.gameObject.CompareTag("Block") && Input.GetButtonDown(grabButton) && blockGrabbed == false)
         {
             Debug.Log("Grabbing Block");
             other.gameObject.transform.parent = playerGameObject.transform;
