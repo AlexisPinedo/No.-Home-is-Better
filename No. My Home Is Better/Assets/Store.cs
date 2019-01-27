@@ -9,16 +9,16 @@ public class Store : MonoBehaviour
 
     private GameObject playerBlock;
 
-    private PlayerControlsTest collidedPlayer;
+    private Player collidedPlayer;
 
     private bool stay = false;
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        collidedPlayer = other.gameObject.GetComponent<PlayerControlsTest>();
+        collidedPlayer = other.gameObject.GetComponent<Player>();
         if (collidedPlayer.blockGrabbed == false)
         {
-            Instantiate(block, new Vector3(other.gameObject.transform.position.x + .5f, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
+            Instantiate(block, new Vector3(other.gameObject.transform.position.x + .5f, other.gameObject.transform.position.y + 0.1f, other.gameObject.transform.position.z), Quaternion.identity);
             playerBlock = GameObject.Find("Block(Clone)");
             playerBlock.transform.parent = collidedPlayer.transform;
             collidedPlayer.blockGrabbed = true;

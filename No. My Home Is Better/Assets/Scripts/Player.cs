@@ -14,30 +14,24 @@ public class Player : MonoBehaviour
     private float gravitySpeed = -20f;
 
     [SerializeField]
-    private Rigidbody2D playerBody;
-
-    [SerializeField]
     private GameObject playerGameObject;
 
     [SerializeField]
     private GameObject Cursor;
 
     [SerializeField]
-    private float rayCastLength = 0.2f;
-
-    [SerializeField]
     private block_place BlockController;
 
     [SerializeField]
-    private int controllerNumber;
+    private int controllerNumber = 1;
+
+    private Rigidbody2D playerBody;
 
     private GameObject grabbedBlock;
 
     private float xVal;
 
     private bool isGrounded = true;
-
-    private bool blockGrabbed = false;
 
     private string horizontalAxis;
 
@@ -49,9 +43,13 @@ public class Player : MonoBehaviour
 
     public GameObject droppedBlock;
 
+    public bool blockGrabbed = false;
+
+
     private void Awake()
     {
         SetControllerNumber();
+        playerBody = this.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -69,20 +67,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown(jumpButton) && isGrounded)
         {
-            Debug.Log("trying to jump");
             playerBody.velocity = new Vector2(playerBody.velocity.x, height);
             isGrounded = false;
-        }
-
-        if (blockGrabbed == true && Input.GetButtonDown(grabButton))
-        {
-            Debug.Log("Trying to let go of block");
-
-            droppedBlock = GameObject.Find("Block(Clone)");
-            //playerGameObject.transform.Find("Block").parent = null;
-            droppedBlock.transform.parent = null;
-            droppedBlock.name = "Dropped Block";
-            blockGrabbed = false;
         }
 
         //CreateCursor if the player is holding a block
@@ -92,7 +78,11 @@ public class Player : MonoBehaviour
             //Place block
             if(Input.GetButtonDown(grabButton))
             {
-
+                droppedBlock = GameObject.Find("Block(Clone)");
+                //playerGameObject.transform.Find("Block").parent = null;
+                droppedBlock.transform.parent = null;
+                droppedBlock.name = "Dropped Block";
+                blockGrabbed = false;
             }
         }
 
@@ -111,12 +101,6 @@ public class Player : MonoBehaviour
     //    return xVal <= 0 ? true : false;
     //}
 
-    private void GrabBlock(Collider2D collider)
-    {
-        collider.gameObject.transform.parent = playerGameObject.transform;
-        blockGrabbed = true;
-    }
-
     private void PlaceBlock()
     {
 
@@ -129,24 +113,27 @@ public class Player : MonoBehaviour
      */
     void CreateCursor(bool facingLeft)
     {
-        BlockController.PlaceBlock(Vector3.zero);
+        //BlockController.PlaceBlock(Vector3.zero);
 
-        ////Get the free positions
-        //List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
-        //Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
-        //if (cursorPosition != BlockController.DNE)
+        //Get the free positions
+        List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
+        //if (freePosition != null)
         //{
-        //    if(!CurrentCursor)
-        //    {
-        //        CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
-        //    }
-        //    else if(CurrentCursor.transform.position != cursorPosition)
-        //    {
-        //        Destroy(CurrentCursor);
-        //        CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
-        //    }
+            Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
+            if (cursorPosition != BlockController.DNE)
+            {
+                if (!CurrentCursor)
+                {
+                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+                }
+                else if (CurrentCursor.transform.position != cursorPosition)
+                {
+                    Destroy(CurrentCursor);
+                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+                }
+            }
         //}
-        
+
 
 
     }
