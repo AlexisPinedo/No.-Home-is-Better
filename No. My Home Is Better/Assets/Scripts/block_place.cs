@@ -65,6 +65,7 @@ public class block_place : MonoBehaviour
 
     /// Update is called once per frame.
     void Update() {
+		/**
 		if(Input.GetMouseButtonDown(0)) {
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -80,6 +81,7 @@ public class block_place : MonoBehaviour
 				}
 			}
 		}
+		*/
     }
     
 	
