@@ -115,24 +115,24 @@ public class Player : MonoBehaviour
     {
         //BlockController.PlaceBlock(Vector3.zero);
 
-        //Get the free positions
-        List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
-        //if (freePosition != null)
-        //{
-            Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
-            if (cursorPosition != BlockController.DNE)
-            {
-                if (!CurrentCursor)
-                {
-                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
-                }
-                else if (CurrentCursor.transform.position != cursorPosition)
-                {
-                    Destroy(CurrentCursor);
-                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
-                }
-            }
-        //}
+        ////Get the free positions
+        //List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
+        ////if (freePosition != null)
+        ////{
+        //    Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
+        //    if (cursorPosition != BlockController.DNE)
+        //    {
+        //        if (!CurrentCursor)
+        //        {
+        //            CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+        //        }
+        //        else if (CurrentCursor.transform.position != cursorPosition)
+        //        {
+        //            Destroy(CurrentCursor);
+        //            CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+        //        }
+        //    }
+        ////}
 
 
 
