@@ -5,7 +5,7 @@ using UnityEngine;
 public class block_place : MonoBehaviour
 {
 	/**Slot represents a block slot in the grid where a block could go.
-	 * isEmpty - true if there's no physical block placed in this block
+	 * isEmpty - true if there's no physical block placed in this slot
 	 * blockLen - the length of any side of a block in world coordinates
 	 * gridPos - this block's position in grid coordinates
 	 * worldCenter - this block's center in world coordinates
@@ -15,11 +15,23 @@ public class block_place : MonoBehaviour
 		public static float blockLen;//must be set before instantiating a block
 		public Vector2 gridPos;
 		public Vector3 worldCenter;
+		private Slot[,] blockGrid;
 		
-		public Slot(Vector2 gridPos) {
+		public Slot(Vector2 gridPos, Slot[,] blockGrid) {
 			isEmpty = true;
 			this.gridPos = gridPos;
 			worldCenter = new Vector3((gridPos[0] + 0.5f)*Slot.blockLen, (gridPos[1] + 0.5f)*Slot.blockLen, 0);
+			this.blockGrid = blockGrid;
+		}
+		
+		///Returns true if a block could be placed in this slot
+		public bool CheckValidity() {
+			if (gridPos.y != 0) {
+				Slot below = blockGrid[(int)gridPos.x, (int)gridPos.y-1];
+				return isEmpty && !below.isEmpty;
+			} else {
+				return isEmpty;
+			}
 		}
 	}
 	
@@ -29,7 +41,7 @@ public class block_place : MonoBehaviour
 	public Vector3 DNE;//A non-existent point; DO NOT MODIFY
 	
 	private Slot[,] blockGrid;
-	private const int gridLen = 10;//The length in blocks of one dimension of the block grid
+	private const int gridLen = 10;//The length in blocks of one dimension of the block grid; must be set before initializing Slots
 	private Rect gridWorldSize;//The size of the grid in world coordinates
 	
 	
@@ -44,7 +56,7 @@ public class block_place : MonoBehaviour
 		blockGrid = new Slot[gridLen,gridLen];
 		for(int i=0; i<gridLen; ++i) {
 			for(int j=0; j<gridLen; ++j) {
-				blockGrid[i,j] = new Slot(new Vector2(i,j));
+				blockGrid[i,j] = new Slot(new Vector2(i,j),blockGrid);
 			}
 		}
 		
@@ -57,7 +69,7 @@ public class block_place : MonoBehaviour
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
 			mPos[2] = 0;
-			List<Vector3> poss = GetAdjacentEmptySlots(mPos);
+			List<Vector3> poss = GetAdjacentValidSlots(mPos);
 			
 			if (poss != null) {
 				for (int i=0; i<poss.Count; ++i) {
@@ -70,33 +82,8 @@ public class block_place : MonoBehaviour
 		}
     }
     
-    
-    
-    ///Custom methods
-    /**GetAdjacentOpenSlots returns the world-coordinate centers of all empty blocks adjacent to the block containing a give position.
-     * @param pos - the position to find blocks adjacent to
-     * @return a list of world-coordinate centers of all empty blocks adjacent to the blocking containing @param pos. or NULL if block is null
-     */
-    public List<Vector3> GetAdjacentEmptySlots(Vector3 pos) {
-		Slot block = GetSlotContaining(pos);
-		if(block == null) {
-			return null;
-		}
-		//Finding adjacent empty blocks
-		List<Slot> adjacents = GetAdjacentSlots(block);
-		for(int i=0; i<adjacents.Count; ++i) {
-			if(!adjacents[i].isEmpty) {
-				adjacents.RemoveAt(i);
-			}
-		}
-		
-		List<Vector3> adjPoss = new List<Vector3>();
-		for(int i = 0; i<adjacents.Count; ++i) {
-			adjPoss.Add(adjacents[i].worldCenter);
-		}
-		return adjPoss;
-	}
 	
+	///Custom methods
 	/**PlaceBlock places a block in the grid at a position if that position's grid slot is empty by handling all grid logic.
 	 * NOTE: Does not create the actual block GameObject
 	 * @param pos - the position to place a block at
@@ -106,12 +93,38 @@ public class block_place : MonoBehaviour
 		Vector3 slotCenter = DNE;//if  block is empty (or doesn't exist), returns (-1,-1,-1)
 		if(gridWorldSize.Contains(pos)) {
 			Slot slot = GetSlotContaining(pos);
-			if (slot != null && slot.isEmpty) {
+			if (slot != null && slot.CheckValidity()) {
 				slot.isEmpty = false;
 				slotCenter = slot.worldCenter;
 			}
 		}
 		return slotCenter;
+	}
+	
+	
+    /**GetAdjacentValidSlots returns the world-coordinate centers of all slots adjacent to the block containing a give position
+     * 		that could have a block placed in them.
+     * @param pos - the position to find blocks adjacent to
+     * @return a list of world-coordinate centers of all empty blocks adjacent to the blocking containing @param pos. or NULL if block is null
+     */
+    public List<Vector3> GetAdjacentValidSlots(Vector3 pos) {
+		Slot block = GetSlotContaining(pos);
+		if(block == null) {
+			return null;
+		}
+		//Finding adjacent empty blocks
+		List<Slot> adjacents = GetAdjacentSlots(block);
+		for(int i=0; i<adjacents.Count; ++i) {
+			if(!adjacents[i].CheckValidity()) {
+				adjacents.RemoveAt(i);
+			}
+		}
+		
+		List<Vector3> adjPoss = new List<Vector3>();
+		for(int i = 0; i<adjacents.Count; ++i) {
+			adjPoss.Add(adjacents[i].worldCenter);
+		}
+		return adjPoss;
 	}
 	
 	
