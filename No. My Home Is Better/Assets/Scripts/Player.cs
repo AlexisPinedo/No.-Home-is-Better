@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float rayCastLength = 0.2f;
 
+    [SerializeField]
+    private GameObject BlockPlace;
+
     private GameObject grabbedBlock;
 
     private float xVal;
@@ -31,7 +34,6 @@ public class Player : MonoBehaviour
     private bool blockGrabbed = false;
 
     private Dictionary<GameObject, HashSet<GameObject>> cursors;
-
 
 
     // Start is called before the first frame update
@@ -44,6 +46,9 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         float xVal = Input.GetAxis("Horizontal");
+
+        RaycastHit2D hitInfo = Physics2D.Raycast(this.transform.position, xVal <= 0 ? Vector2.left : Vector2.right, rayCastLength);
+        //if(hitInfo)
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
 
@@ -162,5 +167,4 @@ public class Player : MonoBehaviour
             DestroyCursor(collider);
         }
     }
-    //Adding a comment to push 
 }
