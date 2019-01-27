@@ -396,6 +396,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 6441517404679743223, guid: e82a232fafd025447bfb92222072769f, type: 3}
   cam: {fileID: 1773536428}
+  gridWorldSize:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   DNE: {x: 0, y: 0, z: 0}
 --- !u!4 &595749506
 Transform:

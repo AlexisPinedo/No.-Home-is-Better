@@ -16,13 +16,17 @@ public class block_place : MonoBehaviour
 		public Vector2 gridPos;
 		public Vector3 worldCenter;
 		private Slot[,] blockGrid;
+		private Rect gridWorldSize;
 		public GameObject block;
 		
-		public Slot(Vector2 gridPos, Slot[,] blockGrid) {
+		public Slot(Vector2 gridPos, Slot[,] blockGrid, Rect gridWorldSize) {
 			isEmpty = true;
 			this.gridPos = gridPos;
 			this.blockGrid = blockGrid;
-			worldCenter = new Vector3((gridPos[0] + 0.5f)*Slot.blockLen, (gridPos[1] + 0.5f)*Slot.blockLen, 0);
+			this.gridWorldSize = gridWorldSize;
+			worldCenter = new Vector3((gridPos[0] + 0.5f)*Slot.blockLen + gridWorldSize.x,
+					(gridPos[1] + 0.5f)*Slot.blockLen + gridWorldSize.y, 0);
+			Debug.Log("gridPos = " + gridPos + ", worldCenter = " + worldCenter);
 			block = null;
 		}
 		
@@ -60,7 +64,7 @@ public class block_place : MonoBehaviour
 		blockGrid = new Slot[gridWidth,gridHeight];
 		for(int i=0; i<gridWidth; ++i) {
 			for(int j=0; j<gridHeight; ++j) {
-				blockGrid[i,j] = new Slot(new Vector2(i,j),blockGrid);
+				blockGrid[i,j] = new Slot(new Vector2(i,j),blockGrid, gridWorldSize );
 			}
 		}
     }
@@ -148,8 +152,10 @@ public class block_place : MonoBehaviour
 	 */
 	private Slot GetSlotContaining(Vector3 pos) {
 		Slot slot = null;
-		int gridX = (int)Mathf.Floor(pos[0]/Slot.blockLen);
-		int gridY = (int)Mathf.Floor(pos[1]/Slot.blockLen);
+		int gridX = (int)Mathf.Floor((pos[0]-gridWorldSize.x)/Slot.blockLen);
+		int gridY = (int)Mathf.Floor((pos[1]-gridWorldSize.y)/Slot.blockLen);
+		
+		Debug.Log(gridX + "," + gridY);
 		
 		if (IsInGrid(new Vector2(gridX, gridY))) {
 			slot = blockGrid[gridX,gridY];
