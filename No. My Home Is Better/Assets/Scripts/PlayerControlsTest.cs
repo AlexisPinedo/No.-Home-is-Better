@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 using Debug = UnityEngine.Debug;
 
 public class PlayerControlsTest : MonoBehaviour
@@ -25,7 +26,7 @@ public class PlayerControlsTest : MonoBehaviour
 //
 //    }
     
-    /*
+    
     [SerializeField]
     private float speed = 5f;
     
@@ -37,6 +38,7 @@ public class PlayerControlsTest : MonoBehaviour
     
     [SerializeField]
     private GameObject playerGameObject;
+    
     private void Awake()
     {
         SetControllerNumber();
@@ -54,7 +56,7 @@ public class PlayerControlsTest : MonoBehaviour
 
     private string grabButton;
     
-    public float Horizontal { get; set; }
+    //public float Horizontal { get; set; }
     
     [SerializeField]
     private int controllerNumber;
@@ -63,7 +65,7 @@ public class PlayerControlsTest : MonoBehaviour
     void FixedUpdate()
     {
         float xVal = Input.GetAxis(horizontalAxis);
-        //Debug.Log(xVal);
+        Debug.Log(xVal);
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
             
         if (Input.GetButtonDown(jumpButton) && isGrounded)
@@ -90,7 +92,6 @@ public class PlayerControlsTest : MonoBehaviour
             isGrounded = true;
         }
         
-
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -104,13 +105,15 @@ public class PlayerControlsTest : MonoBehaviour
         }
     }
     
-    internal void SetControllerNumber()
+    private void SetControllerNumber()
     {
+        
         horizontalAxis = "J" + controllerNumber + "Horizontal";
         jumpButton = "J" + controllerNumber + "Jump";
         grabButton = "J" + controllerNumber + "Grab";
+        Debug.Log(horizontalAxis + " " + jumpButton + " " + grabButton);
         Debug.Log(horizontalAxis + jumpButton);
     }
-    */
+    
 }
     
