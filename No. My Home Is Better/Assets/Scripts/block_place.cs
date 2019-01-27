@@ -16,12 +16,14 @@ public class block_place : MonoBehaviour
 		public Vector2 gridPos;
 		public Vector3 worldCenter;
 		private Slot[,] blockGrid;
+		public GameObject block;
 		
 		public Slot(Vector2 gridPos, Slot[,] blockGrid) {
 			isEmpty = true;
 			this.gridPos = gridPos;
-			worldCenter = new Vector3((gridPos[0] + 0.5f)*Slot.blockLen, (gridPos[1] + 0.5f)*Slot.blockLen, 0);
 			this.blockGrid = blockGrid;
+			worldCenter = new Vector3((gridPos[0] + 0.5f)*Slot.blockLen, (gridPos[1] + 0.5f)*Slot.blockLen, 0);
+			block = null;
 		}
 		
 		///Returns true if a block could be placed in this slot
@@ -36,13 +38,14 @@ public class block_place : MonoBehaviour
 	}
 	
 	
-	public GameObject block;//A reference to the base block (should be a prefab eventually)
+	public GameObject block;//A reference to the base block (should be a prefab eventually). MUST BE 1x1x1 SCALE.
 	public Camera cam;
+	public Rect gridWorldSize;//The size of the grid in world coordinates. MUST HAVE INTEGER WIDTH AND HEIGHT
 	public Vector3 DNE;//A non-existent point; DO NOT MODIFY
 	
 	private Slot[,] blockGrid;
-	private const int gridLen = 10;//The length in blocks of one dimension of the block grid; must be set before initializing Slots
-	private Rect gridWorldSize;//The size of the grid in world coordinates
+	private int gridWidth;
+	private int gridHeight;
 	
 	
     /**Start is called before the first frame update
@@ -50,38 +53,36 @@ public class block_place : MonoBehaviour
      */
     void Start() {
 		DNE =  new Vector3(Mathf.Pow(10,10),Mathf.Pow(10,10),Mathf.Pow(10,10));
-		Slot.blockLen = block.transform.localScale.x;//Make sure the block's scale is positive!
-		gridWorldSize = new Rect(0,0,Slot.blockLen*gridLen, Slot.blockLen*gridLen);
+		Slot.blockLen = block.transform.localScale.x;//Make sure the block's scale is EXACTLY 1!
+		gridWidth = (int)gridWorldSize.width;
+		gridHeight = (int)gridWorldSize.height;
 		
-		blockGrid = new Slot[gridLen,gridLen];
-		for(int i=0; i<gridLen; ++i) {
-			for(int j=0; j<gridLen; ++j) {
+		blockGrid = new Slot[gridWidth,gridHeight];
+		for(int i=0; i<gridWidth; ++i) {
+			for(int j=0; j<gridHeight; ++j) {
 				blockGrid[i,j] = new Slot(new Vector2(i,j),blockGrid);
 			}
 		}
-		
     }
 
 
     /// Update is called once per frame.
     void Update() {
-		/**
+		Debug.DrawLine(gridWorldSize.min,gridWorldSize.max);
 		if(Input.GetMouseButtonDown(0)) {
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
 			mPos[2] = 0;
 			List<Vector3> poss = GetValidSlotsLR(mPos);
-			
 			if (poss != null) {
 				for (int i=0; i<poss.Count; ++i) {
-					Vector3 pos = PlaceBlock(poss[i]);
+					Vector3 pos = PlaceBlock(poss[i], null);
 					if(pos != DNE) {
 						GameObject.Instantiate(block,pos, Quaternion.identity);
 					}
 				}
 			}
 		}
-		*/
     }
     
 	
@@ -91,13 +92,14 @@ public class block_place : MonoBehaviour
 	 * @param pos - the position to place a block at
 	 * @return the center of the slot to actually spawn the block object at
 	 */
-	public Vector3 PlaceBlock(Vector3 pos) {
-		Vector3 slotCenter = DNE;//if  block is empty (or doesn't exist), returns (-1,-1,-1)
+	public Vector3 PlaceBlock(Vector3 pos, GameObject block) {
+		Vector3 slotCenter = DNE;//if block is empty (or doesn't exist), returns (-1,-1,-1)
 		if(gridWorldSize.Contains(pos)) {
 			Slot slot = GetSlotContaining(pos);
 			if (slot != null && slot.CheckValidity()) {
 				slot.isEmpty = false;
 				slotCenter = slot.worldCenter;
+				slot.block = block;
 			}
 		}
 		return slotCenter;
@@ -117,7 +119,7 @@ public class block_place : MonoBehaviour
 		List<Slot> adjacents = GetAdjacentSlots(block);
 		if (block.gridPos.y != 0) {
 			adjacents.Remove(blockGrid[(int)block.gridPos.x,(int)block.gridPos.y-1]);//Removing the one below
-		} else if (block.gridPos.y != gridLen - 1) {
+		} else if (block.gridPos.y != gridHeight - 1) {
 			adjacents.Remove(blockGrid[(int)block.gridPos.x,(int)block.gridPos.y+1]);//Removing the one above
 		}
 		for(int i=0; i<adjacents.Count; ++i) {
@@ -131,6 +133,12 @@ public class block_place : MonoBehaviour
 			adjPoss.Add(adjacents[i].worldCenter);
 		}
 		return adjPoss;
+	}
+	
+	
+	public GameObject GetGameObjectAt(Vector3 pos) {
+		Slot slot = GetSlotContaining(pos);
+		return slot.block;
 	}
 	
 	
@@ -152,7 +160,7 @@ public class block_place : MonoBehaviour
 	
 	
 	private bool IsInGrid(Vector2 gridPos) {
-		if(gridPos.x >= 0 && gridPos.x < gridLen && gridPos.y >= 0 && gridPos.y < gridLen) {
+		if(gridPos.x >= 0 && gridPos.x < gridWidth && gridPos.y >= 0 && gridPos.y < gridHeight) {
 			return true;
 		}
 		return false;
@@ -178,5 +186,5 @@ public class block_place : MonoBehaviour
 			}
 		}
 		return adjacents;
-	}
+	}	
 }
