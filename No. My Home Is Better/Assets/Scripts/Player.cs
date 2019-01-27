@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
          * Increase the gravity for better movement
          * Set the player's velocity and handle jump
          */
-        float xVal = Input.GetAxis("Horizontal");
+        float xVal = Input.GetAxis(horizontalAxis);
         bool facingLeft = xVal <= 0 ? true : false;
         Physics2D.gravity = new Vector2(0, gravitySpeed);
 
