@@ -115,12 +115,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6441517404679743223}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cb75362f0509db4589496aedcaa8946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BlockPlace: {fileID: 0}
+  block_controller: {fileID: 6722094266207790386, guid: 39fe81bafb2cac44d9f19698026094df,
+    type: 3}
   notAPlatform: {fileID: 0}
 --- !u!251 &1064143292
 PlatformEffector2D:

@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private GameObject Cursor;
 
     [SerializeField]
-    private block_place BlockController;
+    public block_place BlockController;
 
     [SerializeField]
     private int controllerNumber = 1;
