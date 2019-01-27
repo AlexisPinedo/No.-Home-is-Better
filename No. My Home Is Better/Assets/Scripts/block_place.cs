@@ -41,7 +41,7 @@ public class block_place : MonoBehaviour
 	public Vector3 DNE;//A non-existent point; DO NOT MODIFY
 	
 	private Slot[,] blockGrid;
-	private const int gridLen = 10;//The length in blocks of one dimension of the block grid; must be set before initializing Slots
+	private const int gridLen = 50;//The length in blocks of one dimension of the block grid; must be set before initializing Slots
 	private Rect gridWorldSize;//The size of the grid in world coordinates
 	
 	
@@ -65,7 +65,7 @@ public class block_place : MonoBehaviour
 
     /// Update is called once per frame.
     void Update() {
-		/**
+		/*
 		if(Input.GetMouseButtonDown(0)) {
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
