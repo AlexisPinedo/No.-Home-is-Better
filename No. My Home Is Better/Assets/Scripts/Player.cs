@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         Debug.Log("Trigger detected");
-        if (other.gameObject.CompareTag("Block") && Input.GetButtonDown(grabButton) && blockGrabbed == false)
+        if (other.gameObject.CompareTag("Block") && Input.GetButton(grabButton) && blockGrabbed == false)
         {
             Debug.Log("Grabbing Block");
             other.gameObject.transform.parent = playerGameObject.transform;
