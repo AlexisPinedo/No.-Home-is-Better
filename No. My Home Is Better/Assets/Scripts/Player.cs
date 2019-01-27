@@ -56,6 +56,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        /*Need Constant GameOver check
+         * 
+         * 
+         */
+
         /*Get the horizontal movement of the player to determine if facing left or right
          * Increase the gravity for better movement
          * Set the player's velocity and handle jump
@@ -90,12 +95,6 @@ public class Player : MonoBehaviour
                 PlaceBlock();
             }
         }
-
-        //Place block
-
-
-
-
     }
 
     /*Determine left or right with ternary statement
