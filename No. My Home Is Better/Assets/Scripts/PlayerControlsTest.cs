@@ -48,13 +48,15 @@ public class PlayerControlsTest : MonoBehaviour
 
     private bool isGrounded = true;
 
-    private bool blockGrabbed = false;
+    public bool blockGrabbed = false;
     
     private string horizontalAxis;
 
     private string jumpButton;
 
     private string grabButton;
+
+    public GameObject droppedBlock;
     
     //public float Horizontal { get; set; }
     
@@ -78,11 +80,14 @@ public class PlayerControlsTest : MonoBehaviour
         if (blockGrabbed == true && Input.GetButtonDown(grabButton))
         {
             Debug.Log("Trying to let go of block");
-            playerGameObject.transform.Find("Block").parent = null;
+                
+            droppedBlock = GameObject.Find("Block(Clone)");
+            //playerGameObject.transform.Find("Block").parent = null;
+            droppedBlock.transform.parent = null;
+            droppedBlock.name = "Dropped Block";
             blockGrabbed = false;
         }
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log("Collision detected");
@@ -93,7 +98,6 @@ public class PlayerControlsTest : MonoBehaviour
         }
         
     }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         Debug.Log("Trigger detected");
@@ -104,18 +108,13 @@ public class PlayerControlsTest : MonoBehaviour
             blockGrabbed = true;
         }
     }
-    
     private void SetControllerNumber()
     {
-        
         horizontalAxis = "J" + controllerNumber + "Horizontal";
         jumpButton = "J" + controllerNumber + "Jump";
         grabButton = "J" + controllerNumber + "Grab";
         Debug.Log(horizontalAxis + " " + jumpButton + " " + grabButton);
         Debug.Log(horizontalAxis + jumpButton);
     }
-    
-    //Adding a comment to update
-    //Adding ANOTHER COMMENT
 }
     
