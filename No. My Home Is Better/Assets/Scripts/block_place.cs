@@ -69,7 +69,7 @@ public class block_place : MonoBehaviour
 
     /// Update is called once per frame.
     void Update() {
-		Debug.DrawLine(gridWorldSize.min,gridWorldSize.max);
+		Debug.DrawLine(gridWorldSize.min,gridWorldSize.max, Color.black	);
 		/*
 		if(Input.GetMouseButtonDown(0)) {
 			//Places a block in the grid
