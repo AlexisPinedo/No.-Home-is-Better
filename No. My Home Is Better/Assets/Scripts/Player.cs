@@ -8,10 +8,10 @@ public class Player : MonoBehaviour
     private float speed = 5f;
 
     [SerializeField]
-    private float height;
+    private float height = 7f;
 
     [SerializeField]
-    private Rigidbody2D playerBody;
+    private float gravitySpeed = -20f;
 
     [SerializeField]
     private GameObject playerGameObject;
@@ -20,108 +20,153 @@ public class Player : MonoBehaviour
     private GameObject Cursor;
 
     [SerializeField]
-    private BoxCollider2D bigTrigger;
+    public block_place BlockController;
+
+    [SerializeField]
+    private int controllerNumber = 1;
+
+    //public Animator playerAnimator;
+
+    private Rigidbody2D playerBody;
+
+    private GameObject grabbedBlock;
 
     private float xVal;
 
     private bool isGrounded = true;
 
-    private bool blockGrabbed = false;
+    private string horizontalAxis;
 
-    private Dictionary<GameObject, HashSet<GameObject>> cursors;
+    private string jumpButton;
 
+    private string grabButton;
 
+    private GameObject CurrentCursor = null;
 
-    // Start is called before the first frame update
-    void Start()
+    public GameObject droppedBlock;
+
+    public bool blockGrabbed = false;
+
+	private bool facingLeft = false;
+
+    public Animator playerAnimator;
+
+    private void Awake()
     {
-        cursors = new Dictionary<GameObject, HashSet<GameObject>>();
+        SetControllerNumber();
+        playerBody = this.GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        bigTrigger.enabled = blockGrabbed;
-        float xVal = Input.GetAxis("Horizontal");
+        /*Need Constant GameOver check
+         * 
+         * 
+         */
+
+        /*Get the horizontal movement of the player to determine if facing left or right
+         * Increase the gravity for better movement
+         * Set the player's velocity and handle jump
+         */
+        float xVal = Input.GetAxis(horizontalAxis);
+        
+        if(xVal < 0)
+        {
+			facingLeft = true;
+		}
+		else if(xVal > 0)
+		{
+			facingLeft = false;
+		}
+        Physics2D.gravity = new Vector2(0, gravitySpeed);
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
+        
+        playerAnimator.SetFloat("speed", xVal*speed);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown(jumpButton) && isGrounded)
         {
             playerBody.velocity = new Vector2(playerBody.velocity.x, height);
             isGrounded = false;
         }
 
-        if (blockGrabbed == true && Input.GetKeyDown(KeyCode.LeftShift))
+        //CreateCursor if the player is holding a block
+        if (blockGrabbed)
         {
-            Debug.Log("Trying to let go of block");
-            playerGameObject.transform.Find("Block").parent = null;
-            blockGrabbed = false;
+            CreateCursor(facingLeft);
+            //Place block
+            if(Input.GetButtonDown(grabButton))
+            {
+                PlaceBlock();
+            }
         }
     }
 
-    void CreateCursor(Collider2D collider)
+    /*Determine left or right with ternary statement
+     * returns true if left, false if right;
+     * */
+    //private bool FacingLeft(float xVal)
+    //{
+    //    return xVal <= 0 ? true : false;
+    //}
+
+    private void PlaceBlock()
     {
-        //Raycast up, left, right and instantiate wherever there isn't a collision (excluding the player)
-        RaycastHit2D hitInfoUp = Physics2D.Raycast(collider.transform.position, Vector2.up, 10f);
-        Debug.DrawRay(collider.transform.position, Vector2.up*2f, Color.green, .5f);
+        droppedBlock = GameObject.Find("Block(Clone)");
+        //playerGameObject.transform.Find("Block").parent = null;
+        droppedBlock.transform.parent = null;
+        droppedBlock.GetComponent<Collider2D>().enabled = true;
 
-        RaycastHit2D hitInfoRight = Physics2D.Raycast(collider.transform.position, Vector2.right, 10f);
-        Debug.DrawRay(collider.transform.position, Vector2.right*2f, Color.green, .5f);
+        droppedBlock.transform.position = CurrentCursor.transform.position;
+        BlockController.PlaceBlock(droppedBlock.transform.position);
+        Destroy(CurrentCursor);
 
-        RaycastHit2D hitInfoLeft = Physics2D.Raycast(collider.transform.position, Vector2.left, 10f);
-        Debug.DrawRay(collider.transform.position, Vector2.left*2f, Color.green, .5f);
-
-
-        if (!hitInfoUp || hitInfoUp.collider.CompareTag("Player")) 
-        {
-            if (!cursors.ContainsKey(collider.gameObject))
-            {
-                cursors[collider.gameObject] = new HashSet<GameObject>();
-            }
-
-            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.up * collider.bounds.size.y, Quaternion.identity));
-        }
-
-        if (!hitInfoLeft || hitInfoLeft.collider.CompareTag("Player"))
-        {
-            if (!cursors.ContainsKey(collider.gameObject))
-            {
-                cursors[collider.gameObject] = new HashSet<GameObject>();
-            }
-
-            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.left * collider.bounds.size.x, Quaternion.identity));
-        }
-
-        if (!hitInfoRight || hitInfoRight.collider.CompareTag("Player"))
-        {
-            if (!cursors.ContainsKey(collider.gameObject))
-            {
-                cursors[collider.gameObject] = new HashSet<GameObject>();
-            }
-
-            cursors[collider.gameObject].Add(Instantiate(Cursor, collider.transform.position + Vector3.right * collider.bounds.size.x, Quaternion.identity));
-        }
-
-
-
+        droppedBlock.name = "Dropped Block";
+        blockGrabbed = false;
     }
 
-    private void DestroyCursor(Collider2D collider)
+    /*Create Cursor
+     * Use block_controller game object (grid)
+     * GetValidSlotsLR - method returns the cursor position left and right of the player
+     * Instantiate Cursor at position, Destroy when another is created 
+     */
+    void CreateCursor(bool facingLeft)
     {
-        if(cursors.ContainsKey(collider.gameObject))
-        {
-            foreach (var cursor in cursors[collider.gameObject])
+        //BlockController.PlaceBlock(Vector3.zero);
+
+        //Get the free positions
+        List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
+        //if (freePosition != null)
+        //{
+            Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
+            if (cursorPosition != BlockController.DNE)
             {
-                Destroy(cursor);
-            }
-        }
+                if (!CurrentCursor)
+                {
+                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+                }
+                else if (CurrentCursor.transform.position != cursorPosition)
+                {
+                    Destroy(CurrentCursor);
+                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+                }
+
+                //BlockController.PlaceBlock(cursorPosition);
+           }
+        //}
+
+
+
     }
 
+
+    //Keep player grounded. Jump resets on the ground and on top of a block.
     private void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log("Collision detected");
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Block"))
         {
             //Debug.Log("Player hit ground");
             isGrounded = true;
@@ -130,31 +175,24 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //when block enters player's trigger, instantiate the cursor
-        Collider2D collider = collision.GetComponent<Collider2D>();
-        if (collider.CompareTag("Block"))
-        {
-            CreateCursor(collider);
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Block") && Input.GetKeyDown(KeyCode.LeftShift) && blockGrabbed == false)
+        if (other.gameObject.CompareTag("Block") && Input.GetButton(grabButton) && blockGrabbed == false)
         {
+            Debug.Log("Grabbing Block");
             other.gameObject.transform.parent = playerGameObject.transform;
             blockGrabbed = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    //Movement
+    private void SetControllerNumber()
     {
-        Collider2D collider = collision.GetComponent<Collider2D>();
-        if (collider.CompareTag("Block"))
-        {
-            DestroyCursor(collider);
-        }
+
+        horizontalAxis = "J" + controllerNumber + "Horizontal";
+        jumpButton = "J" + controllerNumber + "Jump";
+        grabButton = "J" + controllerNumber + "Grab";
+        Debug.Log(horizontalAxis + " " + jumpButton + " " + grabButton);
+        Debug.Log(horizontalAxis + jumpButton);
     }
 }
