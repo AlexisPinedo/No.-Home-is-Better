@@ -115,5 +115,7 @@ public class PlayerControlsTest : MonoBehaviour
         Debug.Log(horizontalAxis + jumpButton);
     }
     
+    //Adding a comment to update
+    
 }
     
