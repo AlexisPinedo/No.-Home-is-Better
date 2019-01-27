@@ -78,11 +78,7 @@ public class Player : MonoBehaviour
             //Place block
             if(Input.GetButtonDown(grabButton))
             {
-                droppedBlock = GameObject.Find("Block(Clone)");
-                //playerGameObject.transform.Find("Block").parent = null;
-                droppedBlock.transform.parent = null;
-                droppedBlock.name = "Dropped Block";
-                blockGrabbed = false;
+                PlaceBlock();
             }
         }
 
@@ -103,7 +99,16 @@ public class Player : MonoBehaviour
 
     private void PlaceBlock()
     {
+        droppedBlock = GameObject.Find("Block(Clone)");
+        //playerGameObject.transform.Find("Block").parent = null;
+        droppedBlock.transform.parent = null;
+        droppedBlock.GetComponent<Collider2D>().enabled = true;
 
+        //droppedBlock.transform.position = CurrentCursor.transform.position;
+        //Destroy(CurrentCursor);
+
+        droppedBlock.name = "Dropped Block";
+        blockGrabbed = false;
     }
 
     /*Create Cursor
@@ -115,24 +120,26 @@ public class Player : MonoBehaviour
     {
         //BlockController.PlaceBlock(Vector3.zero);
 
-        ////Get the free positions
-        //List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
-        ////if (freePosition != null)
-        ////{
-        //    Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
-        //    if (cursorPosition != BlockController.DNE)
-        //    {
-        //        if (!CurrentCursor)
-        //        {
-        //            CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
-        //        }
-        //        else if (CurrentCursor.transform.position != cursorPosition)
-        //        {
-        //            Destroy(CurrentCursor);
-        //            CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
-        //        }
-        //    }
-        ////}
+        //Get the free positions
+        List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
+        if (freePosition != null)
+        {
+            Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
+            if (cursorPosition != BlockController.DNE)
+            {
+                if (!CurrentCursor)
+                {
+                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+                }
+                else if (CurrentCursor.transform.position != cursorPosition)
+                {
+                    Destroy(CurrentCursor);
+                    CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
+                }
+
+                BlockController.PlaceBlock(cursorPosition);
+            }
+        }
 
 
 
