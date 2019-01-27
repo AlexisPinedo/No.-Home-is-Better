@@ -132,8 +132,8 @@ public class Player : MonoBehaviour
 
         //Get the free positions
         List<Vector3> freePosition = BlockController.GetValidSlotsLR(this.transform.position);
-        if (freePosition != null)
-        {
+        //if (freePosition != null)
+        //{
             Vector3 cursorPosition = facingLeft ? freePosition[0] : freePosition[1];
             if (cursorPosition != BlockController.DNE)
             {
@@ -148,8 +148,8 @@ public class Player : MonoBehaviour
                 }
 
                 //BlockController.PlaceBlock(cursorPosition);
-            }
-        }
+           }
+        //}
 
 
 
