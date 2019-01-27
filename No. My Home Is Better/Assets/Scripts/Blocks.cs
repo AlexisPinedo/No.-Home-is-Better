@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Blocks : MonoBehaviour
 {
+    [SerializeField]
+    public Player player;
+
+    public Sprite notAPlatform;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,24 +18,16 @@ public class Blocks : MonoBehaviour
     void Update()
     {
         /*Changing collision when blocks are placed above
-         * 
-         * 
+         * if(blockabove(current pos))
+         *      disable collision
+         *      this.GetComponent<SpriteRenderer>().sprite = notAPlatform;
          * 
          * */
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        /*If colliding with a dropped block, while this is also a dropped block, and the other block is above, disable collision
-         * Need to change sprite as well
-         */
-       // Debug.Log("Collider Tag: " + collision.collider.tag + "; Collider name: " + collision.collider.name + "; this.name: " + this.name + "; Position: " + collision.collider.transform.position.y.ToString());
-
-        if (collision.collider.CompareTag("Block") && this.name == "Dropped Block" && collision.collider.name == "Dropped Block" && collision.collider.transform.position.y > this.transform.position.y + 0.1f)
+        if(player.BlockController.IsBlockAbove(transform.position))
         {
-            this.GetComponent<Collider2D>().enabled = false;
-            //collision.collider.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
         }
+
     }
 
 }
