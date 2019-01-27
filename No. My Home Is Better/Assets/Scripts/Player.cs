@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         droppedBlock.GetComponent<Collider2D>().enabled = true;
 
         droppedBlock.transform.position = CurrentCursor.transform.position;
-        BlockController.PlaceBlock(droppedBlock.transform.position, droppedBlock);
+        BlockController.PlaceBlock(droppedBlock.transform.position);
         Destroy(CurrentCursor);
 
         droppedBlock.name = "Dropped Block";
@@ -170,7 +170,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("Trigger detected");
         if (other.gameObject.CompareTag("Block") && Input.GetButton(grabButton) && blockGrabbed == false)
         {
             Debug.Log("Grabbing Block");
