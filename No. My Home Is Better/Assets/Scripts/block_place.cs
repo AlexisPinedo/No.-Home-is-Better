@@ -26,7 +26,7 @@ public class block_place : MonoBehaviour
 	
 	public GameObject block;//A reference to the base block (should be a prefab eventually)
 	public Camera cam;
-	public Vector3 DNE = new Vector3(Mathf.Infinity,Mathf.Infinity,Mathf.Infinity);//A non-existent point; DO NOT MODIFY
+	public Vector3 DNE;//A non-existent point; DO NOT MODIFY
 	
 	private Slot[,] blockGrid;
 	private const int gridLen = 10;//The length in blocks of one dimension of the block grid
@@ -37,6 +37,7 @@ public class block_place : MonoBehaviour
      * Initializes the grid and other relevant variables.
      */
     void Start() {
+		DNE =  new Vector3(Mathf.Pow(10,10),Mathf.Pow(10,10),Mathf.Pow(10,10));
 		Slot.blockLen = block.transform.localScale.x;//Make sure the block's scale is positive!
 		gridWorldSize = new Rect(0,0,Slot.blockLen*gridLen, Slot.blockLen*gridLen);
 		
@@ -56,13 +57,16 @@ public class block_place : MonoBehaviour
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
 			mPos[2] = 0;
-			Vector3 pos = PlaceBlock(mPos);
-			if(pos.Equals(DNE)) {
-                Debug.Log(pos[0]);
-				GameObject.Instantiate(block,pos, Quaternion.identity);
-			}
+			List<Vector3> poss = GetAdjacentEmptySlots(mPos);
 			
-			Debug.Log("mPos = " + mPos + ", pos = " + pos);
+			if (poss != null) {
+				for (int i=0; i<poss.Count; ++i) {
+					Vector3 pos = PlaceBlock(poss[i]);
+					if(pos != DNE) {
+						GameObject.Instantiate(block,pos, Quaternion.identity);
+					}
+				}
+			}
 		}
     }
     
@@ -71,11 +75,13 @@ public class block_place : MonoBehaviour
     ///Custom methods
     /**GetAdjacentOpenSlots returns the world-coordinate centers of all empty blocks adjacent to the block containing a give position.
      * @param pos - the position to find blocks adjacent to
-     * @return a list of world-coordinate centers of all empty blocks adjacent to the blocking containing @param pos
+     * @return a list of world-coordinate centers of all empty blocks adjacent to the blocking containing @param pos. or NULL if block is null
      */
     public List<Vector3> GetAdjacentEmptySlots(Vector3 pos) {
 		Slot block = GetSlotContaining(pos);
-		
+		if(block == null) {
+			return null;
+		}
 		//Finding adjacent empty blocks
 		List<Slot> adjacents = GetAdjacentSlots(block);
 		for(int i=0; i<adjacents.Count; ++i) {
@@ -100,7 +106,7 @@ public class block_place : MonoBehaviour
 		Vector3 slotCenter = DNE;//if  block is empty (or doesn't exist), returns (-1,-1,-1)
 		if(gridWorldSize.Contains(pos)) {
 			Slot slot = GetSlotContaining(pos);
-			if (slot.isEmpty) {
+			if (slot != null && slot.isEmpty) {
 				slot.isEmpty = false;
 				slotCenter = slot.worldCenter;
 			}
@@ -111,12 +117,26 @@ public class block_place : MonoBehaviour
 	
 	/**GetSlotContaining returns the Slot object that contains the given position.
 	 * @param pos - the position to find the slot for
-	 * @return the Slot object containing @param pos
+	 * @return the Slot object containing @param pos, or null if no such slot exists
 	 */
 	private Slot GetSlotContaining(Vector3 pos) {
+		Slot slot = null;
 		int gridX = (int)Mathf.Floor(pos[0]/Slot.blockLen);
 		int gridY = (int)Mathf.Floor(pos[1]/Slot.blockLen);
-		return blockGrid[gridX, gridY];
+		
+		if (IsInGrid(new Vector2(gridX, gridY))) {
+			slot = blockGrid[gridX,gridY];
+		}
+		
+		return slot;
+	}
+	
+	
+	private bool IsInGrid(Vector2 gridPos) {
+		if(gridPos.x >= 0 && gridPos.x < gridLen && gridPos.y >= 0 && gridPos.y < gridLen) {
+			return true;
+		}
+		return false;
 	}
 	
 	
@@ -129,7 +149,13 @@ public class block_place : MonoBehaviour
 		List<Slot> adjacents = new List<Slot>();
 		for(int i=-1; i<2; ++i) {
 			for(int j=-1; j<2; ++j) {
-				adjacents.Add(blockGrid[(int)ind[0] + i, (int)ind[1] + j]);
+				if(!(j==0 && i==0)) {
+					int adjX = (int)ind[0] + i;
+					int adjY = (int)ind[1] + j;
+					if(IsInGrid(new Vector2(adjX,adjY))) {
+						adjacents.Add(blockGrid[(int)ind[0] + i, (int)ind[1] + j]);
+					}
+				}
 			}
 		}
 		return adjacents;
