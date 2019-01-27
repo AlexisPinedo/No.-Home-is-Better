@@ -57,7 +57,8 @@ public class block_place : MonoBehaviour
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
 			mPos[2] = 0;
 			Vector3 pos = PlaceBlock(mPos);
-			if(pos != DNE) {
+			if(pos.Equals(DNE)) {
+                Debug.Log(pos[0]);
 				GameObject.Instantiate(block,pos, Quaternion.identity);
 			}
 			

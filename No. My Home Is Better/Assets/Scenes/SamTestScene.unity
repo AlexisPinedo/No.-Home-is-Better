@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 774804370}
-  mainCamera: {fileID: 689009758}
-  DNE: {x: -1, y: -1, z: -1}
+  cam: {fileID: 689009758}
+  DNE: {x: Infinity, y: Infinity, z: Infinity}
 --- !u!4 &595749506
 Transform:
   m_ObjectHideFlags: 0
