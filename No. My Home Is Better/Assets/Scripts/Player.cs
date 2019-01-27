@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject Cursor;
 
+    [SerializeField]
+    private float rayCastLength = 0.2f;
+
     private GameObject grabbedBlock;
 
     private float xVal;
@@ -128,11 +131,21 @@ public class Player : MonoBehaviour
         Collider2D collider = collision.GetComponent<Collider2D>();
         if (collider.CompareTag("Block"))
         {
+            Debug.Log("Is Grabbed");
             CreateCursor(collider);
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Block") && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("Is Grabbed");
+            blockGrabbed = !blockGrabbed;
+        }
+    }
+
+    private void OnCollisionStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Block") && Input.GetKeyDown(KeyCode.LeftShift))
         {
