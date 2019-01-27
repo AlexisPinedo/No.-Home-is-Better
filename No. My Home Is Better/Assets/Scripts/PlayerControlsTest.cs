@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 using Debug = UnityEngine.Debug;
 
 public class PlayerControlsTest : MonoBehaviour
@@ -25,7 +26,7 @@ public class PlayerControlsTest : MonoBehaviour
 //
 //    }
     
-    /*
+    
     [SerializeField]
     private float speed = 5f;
     
@@ -37,6 +38,7 @@ public class PlayerControlsTest : MonoBehaviour
     
     [SerializeField]
     private GameObject playerGameObject;
+    
     private void Awake()
     {
         SetControllerNumber();
@@ -46,15 +48,17 @@ public class PlayerControlsTest : MonoBehaviour
 
     private bool isGrounded = true;
 
-    private bool blockGrabbed = false;
+    public bool blockGrabbed = false;
     
     private string horizontalAxis;
 
     private string jumpButton;
 
     private string grabButton;
+
+    public GameObject droppedBlock;
     
-    public float Horizontal { get; set; }
+    //public float Horizontal { get; set; }
     
     [SerializeField]
     private int controllerNumber;
@@ -63,7 +67,7 @@ public class PlayerControlsTest : MonoBehaviour
     void FixedUpdate()
     {
         float xVal = Input.GetAxis(horizontalAxis);
-        //Debug.Log(xVal);
+        Debug.Log(xVal);
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
             
         if (Input.GetButtonDown(jumpButton) && isGrounded)
@@ -76,11 +80,14 @@ public class PlayerControlsTest : MonoBehaviour
         if (blockGrabbed == true && Input.GetButtonDown(grabButton))
         {
             Debug.Log("Trying to let go of block");
-            playerGameObject.transform.Find("Block").parent = null;
+                
+            droppedBlock = GameObject.Find("Block(Clone)");
+            //playerGameObject.transform.Find("Block").parent = null;
+            droppedBlock.transform.parent = null;
+            droppedBlock.name = "Dropped Block";
             blockGrabbed = false;
         }
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log("Collision detected");
@@ -90,9 +97,7 @@ public class PlayerControlsTest : MonoBehaviour
             isGrounded = true;
         }
         
-
     }
-
     private void OnTriggerStay2D(Collider2D other)
     {
         Debug.Log("Trigger detected");
@@ -103,14 +108,13 @@ public class PlayerControlsTest : MonoBehaviour
             blockGrabbed = true;
         }
     }
-    
-    internal void SetControllerNumber()
+    private void SetControllerNumber()
     {
         horizontalAxis = "J" + controllerNumber + "Horizontal";
         jumpButton = "J" + controllerNumber + "Jump";
         grabButton = "J" + controllerNumber + "Grab";
+        Debug.Log(horizontalAxis + " " + jumpButton + " " + grabButton);
         Debug.Log(horizontalAxis + jumpButton);
     }
-    */
 }
     

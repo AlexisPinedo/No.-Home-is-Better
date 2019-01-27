@@ -18,6 +18,7 @@
           <e p="PlayerPanel.cs" t="Include" />
           <e p="PlayerToControllerAssigner.cs" t="Include" />
         </e>
+        <e p="Store.cs" t="Include" />
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="No. My Home Is Better.sln" t="IncludeFlat" />
