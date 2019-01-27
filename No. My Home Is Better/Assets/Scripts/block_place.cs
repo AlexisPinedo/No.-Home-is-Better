@@ -69,7 +69,7 @@ public class block_place : MonoBehaviour
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
 			mPos[2] = 0;
-			List<Vector3> poss = GetAdjacentValidSlots(mPos);
+			List<Vector3> poss = GetValidSlotsLR(mPos);
 			
 			if (poss != null) {
 				for (int i=0; i<poss.Count; ++i) {
@@ -102,18 +102,22 @@ public class block_place : MonoBehaviour
 	}
 	
 	
-    /**GetAdjacentValidSlots returns the world-coordinate centers of all slots adjacent to the block containing a give position
-     * 		that could have a block placed in them.
+    /**GetValidSlotsLR returns the world-coordinate centers of the unique (or non-existent) valid block to the left and right of the given position.
      * @param pos - the position to find blocks adjacent to
      * @return a list of world-coordinate centers of all empty blocks adjacent to the blocking containing @param pos. or NULL if block is null
      */
-    public List<Vector3> GetAdjacentValidSlots(Vector3 pos) {
+    public List<Vector3> GetValidSlotsLR(Vector3 pos) {
 		Slot block = GetSlotContaining(pos);
 		if(block == null) {
 			return null;
 		}
 		//Finding adjacent empty blocks
 		List<Slot> adjacents = GetAdjacentSlots(block);
+		if (block.gridPos.y != 0) {
+			adjacents.Remove(blockGrid[(int)block.gridPos.x,(int)block.gridPos.y-1]);//Removing the one below
+		} else if (block.gridPos.y != gridLen - 1) {
+			adjacents.Remove(blockGrid[(int)block.gridPos.x,(int)block.gridPos.y+1]);//Removing the one above
+		}
 		for(int i=0; i<adjacents.Count; ++i) {
 			if(!adjacents[i].CheckValidity()) {
 				adjacents.RemoveAt(i);
