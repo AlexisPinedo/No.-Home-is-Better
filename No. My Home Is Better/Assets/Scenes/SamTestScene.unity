@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 774804370}
-  mainCamera: {fileID: 689009758}
-  DNE: {x: -1, y: -1, z: -1}
+  cam: {fileID: 689009758}
+  DNE: {x: Infinity, y: Infinity, z: Infinity}
 --- !u!4 &595749506
 Transform:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 774804370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.64, y: -3.1, z: 0}
-  m_LocalScale: {x: 0.4293658, y: 0.4524403, z: 0.4524403}
+  m_LocalScale: {x: 0.4524403, y: 0.4524403, z: 0.4524403}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
