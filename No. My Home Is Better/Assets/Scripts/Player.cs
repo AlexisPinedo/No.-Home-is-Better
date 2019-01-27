@@ -8,7 +8,10 @@ public class Player : MonoBehaviour
     private float speed = 5f;
 
     [SerializeField]
-    private float height;
+    private float height = 7f;
+
+    [SerializeField]
+    private float gravitySpeed = -20f;
 
     [SerializeField]
     private Rigidbody2D playerBody;
@@ -43,8 +46,8 @@ public class Player : MonoBehaviour
     private string grabButton;
 
     private GameObject CurrentCursor = null;
-    
 
+    public GameObject droppedBlock;
 
     private void Awake()
     {
@@ -54,17 +57,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        /*Get the horizontal movement of the player to determine if facing left or right
+         * Increase the gravity for better movement
+         * Set the player's velocity and handle jump
+         */
         float xVal = Input.GetAxis("Horizontal");
         bool facingLeft = xVal <= 0 ? true : false;
-
-        //CreateCursor
-        CreateCursor(facingLeft);
-
-        //Detect current block for grabbing
-
-        //Place block
-
-  
+        Physics2D.gravity = new Vector2(0, gravitySpeed);
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
 
@@ -74,6 +73,34 @@ public class Player : MonoBehaviour
             playerBody.velocity = new Vector2(playerBody.velocity.x, height);
             isGrounded = false;
         }
+
+        if (blockGrabbed == true && Input.GetButtonDown(grabButton))
+        {
+            Debug.Log("Trying to let go of block");
+
+            droppedBlock = GameObject.Find("Block(Clone)");
+            //playerGameObject.transform.Find("Block").parent = null;
+            droppedBlock.transform.parent = null;
+            droppedBlock.name = "Dropped Block";
+            blockGrabbed = false;
+        }
+
+        //CreateCursor if the player is holding a block
+        if (blockGrabbed)
+        {
+            CreateCursor(facingLeft);
+            //Place block
+            if(Input.GetButtonDown(grabButton))
+            {
+
+            }
+        }
+
+        //Place block
+
+
+
+
     }
 
     /*Determine left or right with ternary statement
@@ -88,6 +115,11 @@ public class Player : MonoBehaviour
     {
         collider.gameObject.transform.parent = playerGameObject.transform;
         blockGrabbed = true;
+    }
+
+    private void PlaceBlock()
+    {
+
     }
 
     /*Create Cursor
@@ -119,11 +151,8 @@ public class Player : MonoBehaviour
 
     }
 
-    private void DestroyCursor(Collider2D collider)
-    {
-        
-    }
 
+    //Keep player grounded. Jump resets on the ground and on top of a block.
     private void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log("Collision detected");
@@ -136,6 +165,18 @@ public class Player : MonoBehaviour
 
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log("Trigger detected");
+        if (other.gameObject.CompareTag("Block") && Input.GetButtonDown(grabButton) && blockGrabbed == false)
+        {
+            Debug.Log("Grabbing Block");
+            other.gameObject.transform.parent = playerGameObject.transform;
+            blockGrabbed = true;
+        }
+    }
+
+    //Movement
     private void SetControllerNumber()
     {
 
