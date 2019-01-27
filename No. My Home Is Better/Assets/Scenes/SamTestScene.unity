@@ -138,12 +138,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 595749504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ed8cc6a07370140bc3881ef445bcf7, type: 3}
+  m_Script: {fileID: 11500000, guid: ad134a0fbf3e4044b8f2e934c630bc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 774804370}
   cam: {fileID: 689009758}
-  DNE: {x: Infinity, y: Infinity, z: Infinity}
+  DNE: {x: 0, y: 0, z: 0}
 --- !u!4 &595749506
 Transform:
   m_ObjectHideFlags: 0

@@ -19,8 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject Cursor;
 
-    [SerializeField]
-    private BoxCollider2D bigTrigger;
+    private GameObject grabbedBlock;
 
     private float xVal;
 
@@ -41,7 +40,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //bigTrigger.enabled = blockGrabbed;
         float xVal = Input.GetAxis("Horizontal");
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
@@ -51,16 +49,8 @@ public class Player : MonoBehaviour
             playerBody.velocity = new Vector2(playerBody.velocity.x, height);
             isGrounded = false;
         }
-
-        if (blockGrabbed == true && Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Debug.Log("Trying to let go of block");
-            playerGameObject.transform.Find("Block").parent = null;
-            blockGrabbed = false;
-        }
-
-        Debug.Log(bigTrigger);
     }
+
 
     void CreateCursor(Collider2D collider)
     {
@@ -123,7 +113,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         //Debug.Log("Collision detected");
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Block"))
         {
             //Debug.Log("Player hit ground");
             isGrounded = true;
@@ -144,10 +134,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Block") && Input.GetKeyDown(KeyCode.LeftShift) && blockGrabbed == false)
+        if (other.gameObject.CompareTag("Block") && Input.GetKeyDown(KeyCode.LeftShift))
         {
-            other.gameObject.transform.parent = playerGameObject.transform;
-            blockGrabbed = true;
+            Debug.Log("Is Grabbed");
+            blockGrabbed = !blockGrabbed;
         }
     }
 
