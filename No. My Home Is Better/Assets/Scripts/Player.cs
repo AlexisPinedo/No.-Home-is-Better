@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int controllerNumber = 1;
 
+    //public Animator playerAnimator;
+
     private Rigidbody2D playerBody;
 
     private GameObject grabbedBlock;
@@ -46,6 +48,9 @@ public class Player : MonoBehaviour
     public bool blockGrabbed = false;
 
 	private bool facingLeft = false;
+
+    public Animator playerAnimator;
+
     private void Awake()
     {
         SetControllerNumber();
@@ -78,6 +83,8 @@ public class Player : MonoBehaviour
         Physics2D.gravity = new Vector2(0, gravitySpeed);
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
+        
+        playerAnimator.SetFloat("speed", xVal*speed);
 
         if (Input.GetButtonDown(jumpButton) && isGrounded)
         {
