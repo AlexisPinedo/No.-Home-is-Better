@@ -396,6 +396,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 6441517404679743223, guid: e82a232fafd025447bfb92222072769f, type: 3}
   cam: {fileID: 1773536428}
+  gridWorldSize:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   DNE: {x: 0, y: 0, z: 0}
 --- !u!4 &595749506
 Transform:
@@ -593,7 +599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436300990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -10.09, z: 0}
+  m_LocalPosition: {x: -10.5, y: -10, z: 0}
   m_LocalScale: {x: 0.3875, y: 0.70011, z: 1}
   m_Children: []
   m_Father: {fileID: 121011210}
