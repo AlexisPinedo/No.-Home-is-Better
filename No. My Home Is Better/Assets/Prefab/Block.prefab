@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb75362f0509db4589496aedcaa8946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlockPlace: {fileID: 0}
+  notAPlatform: {fileID: 0}
 --- !u!251 &1064143292
 PlatformEffector2D:
   m_ObjectHideFlags: 0
