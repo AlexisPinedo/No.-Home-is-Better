@@ -26,7 +26,6 @@ public class block_place : MonoBehaviour
 			this.gridWorldSize = gridWorldSize;
 			worldCenter = new Vector3((gridPos[0] + 0.5f)*Slot.blockLen + gridWorldSize.x,
 					(gridPos[1] + 0.5f)*Slot.blockLen + gridWorldSize.y, 0);
-			Debug.Log("gridPos = " + gridPos + ", worldCenter = " + worldCenter);
 			block = null;
 		}
 		
@@ -73,7 +72,14 @@ public class block_place : MonoBehaviour
     /// Update is called once per frame.
     void Update() {
 		Debug.DrawLine(gridWorldSize.min,gridWorldSize.max);
-		if(Input.GetMouseButtonDown(0)) {
+		for(int i=0; i<gridWidth; ++i) {
+			for(int j=0; j<gridHeight; ++j) {
+				if(!blockGrid[i,j].isEmpty) {
+					Debug.Log("BELLLEP: " + blockGrid[i,j].worldCenter);
+				}
+			}
+		}
+		/*if(Input.GetMouseButtonDown(0)) {
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
 			mPos[2] = 0;
@@ -86,7 +92,7 @@ public class block_place : MonoBehaviour
 					}
 				}
 			}
-		}
+		}*/
     }
     
 	
@@ -126,15 +132,41 @@ public class block_place : MonoBehaviour
 		} else if (block.gridPos.y != gridHeight - 1) {
 			adjacents.Remove(blockGrid[(int)block.gridPos.x,(int)block.gridPos.y+1]);//Removing the one above
 		}
+		
+		List<Slot> toDelete = new List<Slot>();
 		for(int i=0; i<adjacents.Count; ++i) {
 			if(!adjacents[i].CheckValidity()) {
-				adjacents.RemoveAt(i);
+				toDelete.Add(adjacents[i]);
 			}
+		}
+		
+		for(int i=0; i<toDelete.Count; ++i) {
+			adjacents.Remove(toDelete[i]);
 		}
 		
 		List<Vector3> adjPoss = new List<Vector3>();
 		for(int i = 0; i<adjacents.Count; ++i) {
 			adjPoss.Add(adjacents[i].worldCenter);
+		}
+		
+		if (adjPoss.Count == 0) {
+			adjPoss = null;
+		} else if (adjPoss.Count == 1) {
+			if (adjPoss[0].x < block.worldCenter.x) {
+				adjPoss.Add(DNE);
+			} else if (adjPoss[0].x > block.worldCenter.x){
+				adjPoss.Insert(0,DNE);
+			}
+		} else {
+			if (adjPoss[0].x > block.worldCenter.x) {
+				Vector3 temp = adjPoss[0];
+				adjPoss[0] = adjPoss[1];
+				adjPoss[1] = temp;
+			} else if (adjPoss[1].x < block.worldCenter.x) {
+				Vector3 temp = adjPoss[0];
+				adjPoss[0] = adjPoss[1];
+				adjPoss[1] = temp;
+			}
 		}
 		return adjPoss;
 	}
@@ -154,8 +186,6 @@ public class block_place : MonoBehaviour
 		Slot slot = null;
 		int gridX = (int)Mathf.Floor((pos[0]-gridWorldSize.x)/Slot.blockLen);
 		int gridY = (int)Mathf.Floor((pos[1]-gridWorldSize.y)/Slot.blockLen);
-		
-		Debug.Log(gridX + "," + gridY);
 		
 		if (IsInGrid(new Vector2(gridX, gridY))) {
 			slot = blockGrid[gridX,gridY];

@@ -45,11 +45,12 @@ public class Player : MonoBehaviour
 
     public bool blockGrabbed = false;
 
-
+	private bool facingLeft = false;
     private void Awake()
     {
         SetControllerNumber();
         playerBody = this.GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -60,7 +61,15 @@ public class Player : MonoBehaviour
          * Set the player's velocity and handle jump
          */
         float xVal = Input.GetAxis(horizontalAxis);
-        bool facingLeft = xVal <= 0 ? true : false;
+        
+        if(xVal < 0)
+        {
+			facingLeft = true;
+		}
+		else if(xVal > 0)
+		{
+			facingLeft = false;
+		}
         Physics2D.gravity = new Vector2(0, gravitySpeed);
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
@@ -104,8 +113,9 @@ public class Player : MonoBehaviour
         droppedBlock.transform.parent = null;
         droppedBlock.GetComponent<Collider2D>().enabled = true;
 
-        //droppedBlock.transform.position = CurrentCursor.transform.position;
-        //Destroy(CurrentCursor);
+        droppedBlock.transform.position = CurrentCursor.transform.position;
+        BlockController.PlaceBlock(droppedBlock.transform.position, droppedBlock);
+        Destroy(CurrentCursor);
 
         droppedBlock.name = "Dropped Block";
         blockGrabbed = false;
@@ -137,7 +147,7 @@ public class Player : MonoBehaviour
                     CurrentCursor = Instantiate(Cursor, cursorPosition, Quaternion.identity);
                 }
 
-                BlockController.PlaceBlock(cursorPosition);
+                //BlockController.PlaceBlock(cursorPosition);
             }
         }
 

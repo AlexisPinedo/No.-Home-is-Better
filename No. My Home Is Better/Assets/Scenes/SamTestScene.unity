@@ -697,7 +697,7 @@ MonoBehaviour:
   gravitySpeed: -20
   playerGameObject: {fileID: 1436300990}
   Cursor: {fileID: 7758009135532258736, guid: 24c1418b22b380d419b7dafcb55d5138, type: 3}
-  BlockController: {fileID: 0}
+  BlockController: {fileID: 595749505}
   controllerNumber: 1
   droppedBlock: {fileID: 0}
   blockGrabbed: 0
