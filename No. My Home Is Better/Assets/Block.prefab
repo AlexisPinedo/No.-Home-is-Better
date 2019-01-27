@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb75362f0509db4589496aedcaa8946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
 --- !u!251 &1064143292
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -139,4 +138,4 @@ PlatformEffector2D:
   m_SurfaceArc: 90
   m_UseSideFriction: 0
   m_UseSideBounce: 0
-  m_SideArc: 1
+  m_SideArc: 0
