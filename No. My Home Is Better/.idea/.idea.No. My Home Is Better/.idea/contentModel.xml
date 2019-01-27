@@ -6,8 +6,18 @@
     <e p="C:\Users\pined\OneDrive\Documents\GitHub\No.-Home-is-Better\No. My Home Is Better" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="FireTest.cs" t="Include" />
-        <e p="PlayerControlsTest.cs" t="Include" />
+        <e p="APlayer.cs" t="Include" />
+        <e p="PlayerScript.cs" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="block_place.cs" t="Include" />
+          <e p="Blocks.cs" t="Include" />
+          <e p="FireTest.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="PlayerControlsTest.cs" t="Include" />
+          <e p="PlayerInput.cs" t="Include" />
+          <e p="PlayerPanel.cs" t="Include" />
+          <e p="PlayerToControllerAssigner.cs" t="Include" />
+        </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="No. My Home Is Better.sln" t="IncludeFlat" />
