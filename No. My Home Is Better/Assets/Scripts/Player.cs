@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bigTrigger.enabled = blockGrabbed;
+        //bigTrigger.enabled = blockGrabbed;
         float xVal = Input.GetAxis("Horizontal");
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
             playerGameObject.transform.Find("Block").parent = null;
             blockGrabbed = false;
         }
+
+        Debug.Log(bigTrigger);
     }
 
     void CreateCursor(Collider2D collider)
