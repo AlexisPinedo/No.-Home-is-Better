@@ -17,7 +17,6 @@ public class block_place : MonoBehaviour
 		public Vector3 worldCenter;
 		private Slot[,] blockGrid;
 		private Rect gridWorldSize;
-		public GameObject block;
 		
 		public Slot(Vector2 gridPos, Slot[,] blockGrid, Rect gridWorldSize) {
 			isEmpty = true;
@@ -26,7 +25,6 @@ public class block_place : MonoBehaviour
 			this.gridWorldSize = gridWorldSize;
 			worldCenter = new Vector3((gridPos[0] + 0.5f)*Slot.blockLen + gridWorldSize.x,
 					(gridPos[1] + 0.5f)*Slot.blockLen + gridWorldSize.y, 0);
-			block = null;
 		}
 		
 		///Returns true if a block could be placed in this slot
@@ -72,21 +70,15 @@ public class block_place : MonoBehaviour
     /// Update is called once per frame.
     void Update() {
 		Debug.DrawLine(gridWorldSize.min,gridWorldSize.max);
-		for(int i=0; i<gridWidth; ++i) {
-			for(int j=0; j<gridHeight; ++j) {
-				if(!blockGrid[i,j].isEmpty) {
-					Debug.Log("BELLLEP: " + blockGrid[i,j].worldCenter);
-				}
-			}
-		}
-		/*if(Input.GetMouseButtonDown(0)) {
+		/*
+		if(Input.GetMouseButtonDown(0)) {
 			//Places a block in the grid
 			Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition);
 			mPos[2] = 0;
 			List<Vector3> poss = GetValidSlotsLR(mPos);
 			if (poss != null) {
 				for (int i=0; i<poss.Count; ++i) {
-					Vector3 pos = PlaceBlock(poss[i], null);
+					Vector3 pos = PlaceBlock(poss[i]);
 					if(pos != DNE) {
 						GameObject.Instantiate(block,pos, Quaternion.identity);
 					}
@@ -102,14 +94,13 @@ public class block_place : MonoBehaviour
 	 * @param pos - the position to place a block at
 	 * @return the center of the slot to actually spawn the block object at
 	 */
-	public Vector3 PlaceBlock(Vector3 pos, GameObject block) {
+	public Vector3 PlaceBlock(Vector3 pos) {
 		Vector3 slotCenter = DNE;//if block is empty (or doesn't exist), returns (-1,-1,-1)
 		if(gridWorldSize.Contains(pos)) {
 			Slot slot = GetSlotContaining(pos);
 			if (slot != null && slot.CheckValidity()) {
 				slot.isEmpty = false;
 				slotCenter = slot.worldCenter;
-				slot.block = block;
 			}
 		}
 		return slotCenter;
@@ -172,10 +163,23 @@ public class block_place : MonoBehaviour
 	}
 	
 	
-	public GameObject GetGameObjectAt(Vector3 pos) {
+	public bool IsBlockAbove(Vector3 pos) {
+		Slot slot = GetSlotContaining(pos);
+		if (slot == null) {
+			return false;
+		}
+		
+		if (slot.gridPos.y != gridHeight - 1 && !blockGrid[(int)slot.gridPos.x, (int)slot.gridPos.y + 1].isEmpty) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/*public GameObject GetGameObjectAt(Vector3 pos) {
 		Slot slot = GetSlotContaining(pos);
 		return slot.block;
-	}
+	}*/
 	
 	
 	/**GetSlotContaining returns the Slot object that contains the given position.
@@ -218,6 +222,7 @@ public class block_place : MonoBehaviour
 					if(IsInGrid(new Vector2(adjX,adjY))) {
 						adjacents.Add(blockGrid[(int)ind[0] + i, (int)ind[1] + j]);
 					}
+					
 				}
 			}
 		}
