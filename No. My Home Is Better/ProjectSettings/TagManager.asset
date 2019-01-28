@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Ground
   - Block
+  - Goal
   layers:
   - Default
   - TransparentFX

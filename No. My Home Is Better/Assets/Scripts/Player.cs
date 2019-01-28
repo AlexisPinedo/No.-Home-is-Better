@@ -103,6 +103,18 @@ public class Player : MonoBehaviour
             }
         }
     }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		if(collision.GetComponent<Collider2D>().CompareTag("Goal"))
+		{
+			GameOver();
+		}
+	}
+	
+	private void GameOver() {
+		
+	}
 
     /*Determine left or right with ternary statement
      * returns true if left, false if right;
