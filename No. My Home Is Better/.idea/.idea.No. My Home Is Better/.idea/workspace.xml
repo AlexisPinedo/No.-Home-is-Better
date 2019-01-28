@@ -72,10 +72,10 @@
             <state relative-caret-position="60">
               <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
               <folding>
-                <marker date="1548627811368" expanded="true" signature="6:135" ph="..." />
-                <marker date="1548627811368" expanded="true" signature="180:327" ph="{...}" />
-                <marker date="1548627811368" expanded="true" signature="210:257" ph="{...}" />
-                <marker date="1548627811368" expanded="true" signature="285:325" ph="{...}" />
+                <marker date="1548637092911" expanded="true" signature="6:135" ph="..." />
+                <marker date="1548637092911" expanded="true" signature="180:429" ph="{...}" />
+                <marker date="1548637092911" expanded="true" signature="210:257" ph="{...}" />
+                <marker date="1548637092911" expanded="true" signature="285:325" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -355,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47711000" />
+    <option name="totallyTimeSpent" value="48309000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -460,10 +460,10 @@
         <state relative-caret-position="60">
           <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
           <folding>
-            <marker date="1548627811368" expanded="true" signature="6:135" ph="..." />
-            <marker date="1548627811368" expanded="true" signature="180:327" ph="{...}" />
-            <marker date="1548627811368" expanded="true" signature="210:257" ph="{...}" />
-            <marker date="1548627811368" expanded="true" signature="285:325" ph="{...}" />
+            <marker date="1548637092911" expanded="true" signature="6:135" ph="..." />
+            <marker date="1548637092911" expanded="true" signature="180:429" ph="{...}" />
+            <marker date="1548637092911" expanded="true" signature="210:257" ph="{...}" />
+            <marker date="1548637092911" expanded="true" signature="285:325" ph="{...}" />
           </folding>
         </state>
       </provider>
