@@ -28,7 +28,8 @@ public class Player : MonoBehaviour
     //public Animator playerAnimator;
 
     private Rigidbody2D playerBody;
-
+    
+    [SerializeField]
     private GameObject grabbedBlock;
 
     private float xVal;
@@ -198,7 +199,15 @@ public class Player : MonoBehaviour
             //Debug.Log("Player hit ground");
             isGrounded = true;
         }
-
+        if (other.collider.CompareTag("Store"))
+        {
+            if (blockGrabbed == false)
+            {
+                GameObject childBlock = Instantiate(grabbedBlock, new Vector3(this.transform.position.x + .5f, this.transform.position.y + 0.1f, this.transform.position.z), Quaternion.identity);
+                childBlock.transform.parent = this.transform;
+                blockGrabbed = true;
+            }
+        }
 
     }
 
@@ -210,6 +219,7 @@ public class Player : MonoBehaviour
             other.gameObject.transform.parent = playerGameObject.transform;
             blockGrabbed = true;
         }
+
     }
 
     //Movement
