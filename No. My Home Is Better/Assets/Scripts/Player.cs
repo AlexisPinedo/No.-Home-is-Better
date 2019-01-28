@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -114,7 +115,7 @@ public class Player : MonoBehaviour
 	}
 	
 	private void GameOver() {
-		
+		SceneManager.LoadScene(2);
 	}
 
     /*Determine left or right with ternary statement
