@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 
 	private bool facingLeft = false;
 
-    //public Animator playerAnimator;
+    public Animator playerAnimator;
 
     private void Awake()
     {
@@ -85,12 +85,13 @@ public class Player : MonoBehaviour
 
         playerBody.velocity = new Vector2(xVal * speed, playerBody.velocity.y);
         
-        //playerAnimator.SetFloat("speed", xVal*speed);
+        playerAnimator.SetFloat("speed", Mathf.Abs(xVal * speed));
 
         if (Input.GetButtonDown(jumpButton) && isGrounded)
         {
             playerBody.velocity = new Vector2(playerBody.velocity.x, height);
             isGrounded = false;
+            playerAnimator.SetBool("jump", true);
         }
 
         //CreateCursor if the player is holding a block
@@ -198,6 +199,7 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("Player hit ground");
             isGrounded = true;
+            playerAnimator.SetBool("jump", false);
         }
         if (other.collider.CompareTag("Store"))
         {

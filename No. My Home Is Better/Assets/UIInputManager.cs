@@ -15,4 +15,9 @@ public class UIInputManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void changeScene(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
+    }
 }

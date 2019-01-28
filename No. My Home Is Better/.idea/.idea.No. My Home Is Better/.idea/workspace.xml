@@ -21,12 +21,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cs" value="7076" />
+          <entry key="cs" value="7146" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="C#" value="7076" />
+          <entry key="C#" value="7146" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -72,10 +72,10 @@
             <state relative-caret-position="60">
               <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
               <folding>
-                <marker date="1548627811368" expanded="true" signature="6:135" ph="..." />
-                <marker date="1548627811368" expanded="true" signature="180:327" ph="{...}" />
-                <marker date="1548627811368" expanded="true" signature="210:257" ph="{...}" />
-                <marker date="1548627811368" expanded="true" signature="285:325" ph="{...}" />
+                <marker date="1548637092911" expanded="true" signature="6:135" ph="..." />
+                <marker date="1548637092911" expanded="true" signature="180:429" ph="{...}" />
+                <marker date="1548637092911" expanded="true" signature="210:257" ph="{...}" />
+                <marker date="1548637092911" expanded="true" signature="285:325" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -93,39 +93,44 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="86" column="55" selection-start-line="86" selection-start-column="55" selection-end-line="86" selection-end-column="55" />
+            <state relative-caret-position="285">
+              <caret line="201" column="48" selection-start-line="201" selection-start-column="48" selection-end-line="201" selection-end-column="48" />
               <folding>
-                <marker date="1548633200301" expanded="false" signature="6:78" ph="..." />
-                <marker date="1548633200301" expanded="true" signature="115:5843" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="1018:1125" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="1188:2318" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="1203:1269" ph="/* Need Constant GameOver check ... */" />
-                <marker date="1548633200301" expanded="true" signature="1279:1476" ph="/* Get the horizontal movement of the player to determine if facing left or right ... */" />
-                <marker date="1548633200301" expanded="true" signature="1558:1594" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="1614:1645" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="1909:2039" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="2122:2312" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="2244:2302" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="2324:2427" ph="/* Determine left or right with ternary statement ... */" />
-                <marker date="1548633200301" expanded="true" signature="2432:2528" ph="/* private bool FacingLeft(float xVal) ... */" />
-                <marker date="1548633200301" expanded="true" signature="2559:3520" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="3019:3406" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="3155:3402" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="3339:3397" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="3526:3757" ph="/* Create Cursor ... */" />
-                <marker date="1548633200301" expanded="true" signature="3796:4757" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="3811:3888" ph="/* BlockController.PlaceBlock(Vector3.zero); ... */" />
-                <marker date="1548633200301" expanded="true" signature="4017:4684" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="4167:4674" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="4217:4347" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="4424:4598" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="4716:4748" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="4891:5136" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="5031:5128" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="5188:5480" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="5304:5474" ph="{...}" />
-                <marker date="1548633200301" expanded="true" signature="5535:5841" ph="{...}" />
+                <marker date="1548636356187" expanded="false" signature="6:78" ph="..." />
+                <marker date="1548636356187" expanded="true" signature="115:6597" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="1041:1148" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="1211:2402" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="1226:1292" ph="/* Need Constant GameOver check ... */" />
+                <marker date="1548636356187" expanded="true" signature="1302:1499" ph="/* Get the horizontal movement of the player to determine if facing left or right ... */" />
+                <marker date="1548636356187" expanded="true" signature="1581:1617" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="1637:1668" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="1943:2123" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="2206:2396" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="2328:2386" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="2463:2557" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="2531:2554" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="2585:2592" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="2598:2701" ph="/* Determine left or right with ternary statement ... */" />
+                <marker date="1548636356187" expanded="true" signature="2706:2802" ph="/* private bool FacingLeft(float xVal) ... */" />
+                <marker date="1548636356187" expanded="true" signature="2833:3794" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="3293:3680" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="3429:3676" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="3613:3671" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="3800:4031" ph="/* Create Cursor ... */" />
+                <marker date="1548636356187" expanded="true" signature="4070:5031" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="4085:4162" ph="/* BlockController.PlaceBlock(Vector3.zero); ... */" />
+                <marker date="1548636356187" expanded="true" signature="4291:4958" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="4441:4948" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="4491:4621" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="4698:4872" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="4990:5022" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="5165:5889" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="5305:5453" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="5501:5882" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="5550:5872" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="5941:6234" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="6057:6227" ph="{...}" />
+                <marker date="1548636356187" expanded="true" signature="6289:6595" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -168,12 +173,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Store.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="55" />
+            <state relative-caret-position="270">
+              <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
               <folding>
-                <marker date="1548627811366" expanded="false" signature="6:78" ph="..." />
-                <marker date="1548627811366" expanded="true" signature="597:846" ph="{...}" />
-                <marker date="1548627811366" expanded="true" signature="597:852" ph="{...}" />
+                <marker date="1548636216971" expanded="false" signature="6:78" ph="..." />
+                <marker date="1548636216971" expanded="true" signature="904:914" ph="{...}" />
+                <marker date="1548636216971" expanded="true" signature="904:920" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -232,6 +237,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>horizontal</find>
+      <find>isgrounded</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -349,7 +355,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46555000" />
+    <option name="totallyTimeSpent" value="48309000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -364,7 +370,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10671141" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10671141" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -385,7 +391,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Errors In Solution" order="3" visible="true" weight="0.3295302" />
+      <window_info anchor="right" id="Errors In Solution" order="3" visible="true" weight="0.3295302" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
@@ -454,10 +460,10 @@
         <state relative-caret-position="60">
           <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
           <folding>
-            <marker date="1548627811368" expanded="true" signature="6:135" ph="..." />
-            <marker date="1548627811368" expanded="true" signature="180:327" ph="{...}" />
-            <marker date="1548627811368" expanded="true" signature="210:257" ph="{...}" />
-            <marker date="1548627811368" expanded="true" signature="285:325" ph="{...}" />
+            <marker date="1548637092911" expanded="true" signature="6:135" ph="..." />
+            <marker date="1548637092911" expanded="true" signature="180:429" ph="{...}" />
+            <marker date="1548637092911" expanded="true" signature="210:257" ph="{...}" />
+            <marker date="1548637092911" expanded="true" signature="285:325" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -501,12 +507,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Store.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="55" />
+        <state relative-caret-position="270">
+          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
           <folding>
-            <marker date="1548627811366" expanded="false" signature="6:78" ph="..." />
-            <marker date="1548627811366" expanded="true" signature="597:846" ph="{...}" />
-            <marker date="1548627811366" expanded="true" signature="597:852" ph="{...}" />
+            <marker date="1548636216971" expanded="false" signature="6:78" ph="..." />
+            <marker date="1548636216971" expanded="true" signature="904:914" ph="{...}" />
+            <marker date="1548636216971" expanded="true" signature="904:920" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -555,39 +561,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="86" column="55" selection-start-line="86" selection-start-column="55" selection-end-line="86" selection-end-column="55" />
+        <state relative-caret-position="285">
+          <caret line="201" column="48" selection-start-line="201" selection-start-column="48" selection-end-line="201" selection-end-column="48" />
           <folding>
-            <marker date="1548633200301" expanded="false" signature="6:78" ph="..." />
-            <marker date="1548633200301" expanded="true" signature="115:5843" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="1018:1125" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="1188:2318" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="1203:1269" ph="/* Need Constant GameOver check ... */" />
-            <marker date="1548633200301" expanded="true" signature="1279:1476" ph="/* Get the horizontal movement of the player to determine if facing left or right ... */" />
-            <marker date="1548633200301" expanded="true" signature="1558:1594" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="1614:1645" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="1909:2039" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="2122:2312" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="2244:2302" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="2324:2427" ph="/* Determine left or right with ternary statement ... */" />
-            <marker date="1548633200301" expanded="true" signature="2432:2528" ph="/* private bool FacingLeft(float xVal) ... */" />
-            <marker date="1548633200301" expanded="true" signature="2559:3520" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="3019:3406" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="3155:3402" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="3339:3397" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="3526:3757" ph="/* Create Cursor ... */" />
-            <marker date="1548633200301" expanded="true" signature="3796:4757" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="3811:3888" ph="/* BlockController.PlaceBlock(Vector3.zero); ... */" />
-            <marker date="1548633200301" expanded="true" signature="4017:4684" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="4167:4674" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="4217:4347" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="4424:4598" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="4716:4748" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="4891:5136" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="5031:5128" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="5188:5480" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="5304:5474" ph="{...}" />
-            <marker date="1548633200301" expanded="true" signature="5535:5841" ph="{...}" />
+            <marker date="1548636356187" expanded="false" signature="6:78" ph="..." />
+            <marker date="1548636356187" expanded="true" signature="115:6597" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="1041:1148" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="1211:2402" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="1226:1292" ph="/* Need Constant GameOver check ... */" />
+            <marker date="1548636356187" expanded="true" signature="1302:1499" ph="/* Get the horizontal movement of the player to determine if facing left or right ... */" />
+            <marker date="1548636356187" expanded="true" signature="1581:1617" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="1637:1668" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="1943:2123" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="2206:2396" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="2328:2386" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="2463:2557" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="2531:2554" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="2585:2592" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="2598:2701" ph="/* Determine left or right with ternary statement ... */" />
+            <marker date="1548636356187" expanded="true" signature="2706:2802" ph="/* private bool FacingLeft(float xVal) ... */" />
+            <marker date="1548636356187" expanded="true" signature="2833:3794" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="3293:3680" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="3429:3676" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="3613:3671" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="3800:4031" ph="/* Create Cursor ... */" />
+            <marker date="1548636356187" expanded="true" signature="4070:5031" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="4085:4162" ph="/* BlockController.PlaceBlock(Vector3.zero); ... */" />
+            <marker date="1548636356187" expanded="true" signature="4291:4958" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="4441:4948" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="4491:4621" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="4698:4872" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="4990:5022" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="5165:5889" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="5305:5453" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="5501:5882" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="5550:5872" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="5941:6234" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="6057:6227" ph="{...}" />
+            <marker date="1548636356187" expanded="true" signature="6289:6595" ph="{...}" />
           </folding>
         </state>
       </provider>
