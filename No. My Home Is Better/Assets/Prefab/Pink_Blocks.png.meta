@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: d786788356277094784905757fd6907c
+guid: 10e0a5743b1c5124a82703dbdb324ead
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Blue_Blocks_0
-    21300002: Blue_Blocks_1
+    21300000: Pink_Blocks_0
+    21300002: Pink_Blocks_1
+    21300004: Pink_Blocks_2
+    21300006: Pink_Blocks_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -47,7 +49,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -86,41 +88,81 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue_Blocks_0
+      name: Pink_Blocks_0
       rect:
         serializedVersion: 2
-        x: 59
-        y: 50
-        width: 360
-        height: 360
+        x: 32
+        y: 119
+        width: 359
+        height: 367
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce432744a9f79af46b59a0a856e2fdbb
+      spriteID: ec893f82b2e586540a2b918558443fc0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Blue_Blocks_1
+      name: Pink_Blocks_1
       rect:
         serializedVersion: 2
-        x: 508
-        y: 56
-        width: 359
-        height: 360
+        x: 394
+        y: 121
+        width: 53
+        height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a9ea2da98d00cd44b7c616eec1d1705
+      spriteID: 2281abcff57c221479579082702d874b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Blocks_2
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 115
+        width: 359
+        height: 359
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa7f2590911719c4f98aa893fe33ee0c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Blocks_3
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 117
+        width: 359
+        height: 359
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c82fb3665b515f142a5645d68897ad6b
       vertices: []
       indices: 
       edges: []
@@ -128,7 +170,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: cd7a4da34ebb77941a640586b5eabe50
+    spriteID: 836dfefa60a52e948815eed0a4da5fed
     vertices: []
     indices: 
     edges: []
