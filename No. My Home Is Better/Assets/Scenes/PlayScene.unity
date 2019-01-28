@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 283406359}
   m_Layer: 0
   m_Name: Store
-  m_TagString: Untagged
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,7 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f19e219f60fb1341b240d3480b26df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 6441517404679743223, guid: e82a232fafd025447bfb92222072769f, type: 3}
 --- !u!1001 &311122968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1666,7 +1665,7 @@ GameObject:
   - component: {fileID: 1679784659}
   m_Layer: 0
   m_Name: Store (1)
-  m_TagString: Untagged
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1683,7 +1682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f19e219f60fb1341b240d3480b26df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 6441517404679743223, guid: e82a232fafd025447bfb92222072769f, type: 3}
 --- !u!61 &1679784660
 BoxCollider2D:
   m_ObjectHideFlags: 0
