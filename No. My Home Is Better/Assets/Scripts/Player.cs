@@ -111,6 +111,10 @@ public class Player : MonoBehaviour
 			GameOver();
 		}
 	}
+	
+	private void GameOver() {
+		
+	}
 
     /*Determine left or right with ternary statement
      * returns true if left, false if right;
